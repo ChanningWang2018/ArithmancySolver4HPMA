@@ -2,7 +2,7 @@ name: Deploy to ModelScope Studio
 
 on:
   push:
-    branches: [main]
+    branches: [modelscope-deploy]
 
 jobs:
   deploy-to-modelscope:
@@ -17,5 +17,5 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git remote add modelscope https://oauth2:$MS_TOKEN@www.modelscope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA.git
+          git remote add modelscope https://oauth2:$MS_TOKEN@modelscope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA.git
           git push --force modelscope main

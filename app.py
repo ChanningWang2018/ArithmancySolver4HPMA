@@ -1,7 +1,6 @@
 import gradio as gr
-from httpx import get
 
-from solver import get_results, optimize
+from solver import get_results
 from ui.components import (
     get_blooms_acquisition_rate,
     get_budget,

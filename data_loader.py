@@ -26,12 +26,20 @@ PLANTS_DF = load_data_from_csv("plants.csv", "name")
 DISHES_DF = load_data_from_csv("dishes.csv", "name")
 
 
-with open("ui/labels.json", "r", encoding="utf-8") as f:
-    labels = json.load(f)
+def load_labels_from_json() -> dict:
+    with open("ui/labels.json", "r", encoding="utf-8") as f:
+        labels = json.load(f)
+    return labels
 
-PLANTS_LABELS = labels["plants"]
-DISHES_LABELS = labels["dishes"]
-TIERS_LABELS = labels["tiers"]
+
+LABELS = load_labels_from_json()
+PLANTS_LABELS = LABELS["en"]["plants"]
+DISHES_LABELS = LABELS["en"]["dishes"]
+TIERS_LABELS = LABELS["en"]["tiers"]
+
+PLANTS_LABELS_CN = LABELS["cn"]["plants"]
+DISHES_LABELS_CN = LABELS["cn"]["dishes"]
+TIERS_LABELS_CN = LABELS["cn"]["tiers"]
 
 GOLD_PLANTS_DF = PLANTS_DF[
     PLANTS_DF["gold"] > 1

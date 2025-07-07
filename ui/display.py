@@ -1,6 +1,7 @@
 from typing import Sequence
 
 import gradio as gr
+from numpy import info
 
 from data_loader import (
     DISHES_DF,
@@ -9,6 +10,7 @@ from data_loader import (
     GEMS_PLANTS_DF,
     GOLD_DISHES_DF,
     GOLD_PLANTS_DF,
+    LABELS,
     PLANTS_DF,
     PLANTS_LABELS,
     TIERS_LABELS,
@@ -23,15 +25,32 @@ def get_language():
     Returns a Gradio Dropdown component for selecting language.
     """
     return gr.Dropdown(
-        choices=[("English", "en-US"), ("简体中文", "cn-ZH"), ("日本語", "ja-JP")],
-        value="en-US",
+        choices=[("English", "en"), ("简体中文", "cn"), ("日本語", "ja")],
+        value="en",
         label=_("Language"),
         info=_(
-            "Select the language for the interface. Currently, only English is supported (ToT)"
+            "Select the language for the interface. Currently, only part of texts are translated."
         ),
         elem_id="language-select",
         interactive=True,
     )
+
+
+def update_inventory_ui_by_language(language):
+    setup_i18n(language)
+    return [
+        gr.update(
+            label=LABELS[language]["plants"][row["name"]],
+            info=f"{LABELS[language]['tiers'][row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
+        )
+        for _, row in PLANTS_DF.iterrows()
+    ] + [
+        gr.update(
+            label=LABELS[language]["dishes"][row["name"]],
+            info=f"{LABELS[language]['tiers'][row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
+        )
+        for _, row in DISHES_DF.iterrows()
+    ]
 
 
 def get_currency():
@@ -178,20 +197,15 @@ def get_selected_dishes(currency, select_all=False):
 
 def prerender_inventory_inputs() -> list[gr.Number]:
     """Returns Gradio Number components for inventory input."""
-    _components = []
 
     def _get_inventory_input(row, visible=True, **kwargs) -> gr.Number:
         """
         Returns a Gradio Number component for inventory input based on the dataframe row data."""
         return gr.Number(
-            label=_(
-                PLANTS_LABELS[row["name"]]
-                if row["name"] in PLANTS_LABELS
-                else DISHES_LABELS[row["name"]]
-            ),
-            info=_(
-                f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}"
-            ),
+            label=PLANTS_LABELS[row["name"]]
+            if row["name"] in PLANTS_LABELS
+            else DISHES_LABELS[row["name"]],
+            info=f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
             value=0,
             precision=0,
             minimum=0,
@@ -216,7 +230,7 @@ def update_inventory_inputs(
     _out = []
     for _, row in PLANTS_DF.iterrows():
         _out.append(
-            gr.Number(
+            gr.update(
                 visible=True and row[currency] > 0 and row["tier"] != "feeble",
             )
             if row["name"] in selected_plants
@@ -224,7 +238,7 @@ def update_inventory_inputs(
         )
     for _, row in DISHES_DF.iterrows():
         _out.append(
-            gr.Number(
+            gr.update(
                 visible=row[currency] > 0,
             )
             if row["name"] in selected_dishes
@@ -246,7 +260,29 @@ def get_strategy():
         value="MinimizeStock",
         type="value",
         label=_("Selling Strategy"),
-        info=_("Select the strategy for selling plants."),
+        info=_("Select the strategy for selling items."),
         interactive=True,
         elem_id="strategy-radio",
     )
+
+
+def format_results(results):
+    """
+    Format the results for display.
+
+    Args:
+        results (dict): The results dictionary containing solution, total_price, total_count, and remaining.
+
+    Returns:
+        str: A formatted string representation of the results.
+    """
+    output = []
+    output.append(_("Solution:"))
+    for item, count in results["solution"].items():
+        output.append(f"{item}: {count}")
+
+    output.append(f"\n{_('Total Value:')} {results['total_price']}")
+    output.append(f"{_('Total Count:')} {results['total_count']}")
+    output.append(f"{_('Remaining Budget')}: {results['remaining']}")
+
+    return "\n".join(output)

@@ -3,11 +3,19 @@ from datetime import datetime
 import numpy as np
 from numpy.typing import NDArray
 from pyscipopt import Model, quicksum
+from ui.display import format_results
 from ui.i18n import setup_i18n
 
 _ = setup_i18n()
 
-from data_loader import DISHES_DF, DISHES_LABELS, PLANTS_DF, PLANTS_LABELS, TIERS_LABELS
+from data_loader import (
+    DISHES_DF,
+    DISHES_LABELS,
+    LABELS,
+    PLANTS_DF,
+    PLANTS_LABELS,
+    TIERS_LABELS,
+)
 
 
 def optimize(budget, strategy, stocks, sold_prices):
@@ -80,29 +88,8 @@ def optimize(budget, strategy, stocks, sold_prices):
     )
 
 
-def format_results(results):
-    """
-    Format the results for display.
-
-    Args:
-        results (dict): The results dictionary containing solution, total_price, total_count, and remaining.
-
-    Returns:
-        str: A formatted string representation of the results.
-    """
-    output = []
-    output.append(_("Solution:"))
-    for item, count in results["solution"].items():
-        output.append(f"{item}: {count}")
-
-    output.append(f"\n{_('Total Value:')} {results['total_price']}")
-    output.append(f"{_('Total Count:')} {results['total_count']}")
-    output.append(f"{_('Remaining Budget')}: {results['remaining']}")
-
-    return "\n".join(output)
-
-
 def get_results(
+    language,
     currency,
     budget,
     plants_prices_extra_rate,
@@ -129,7 +116,7 @@ def get_results(
     ]
     results = {}
     results["solution"] = {
-        f"{PLANTS_LABELS[PLANTS_DF.iloc[i]['name']]} ({TIERS_LABELS[PLANTS_DF.iloc[i]['tier']]}, {int(prices[i])} {currency})": plants_solution[
+        f"{LABELS[language]['plants'][PLANTS_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][PLANTS_DF.iloc[i]['tier']]}, {int(prices[i])} {currency})": plants_solution[
             i
         ]
         for i in range(len(PLANTS_DF))
@@ -137,7 +124,7 @@ def get_results(
     }
     results["solution"].update(
         {
-            f"{DISHES_LABELS[DISHES_DF.iloc[i]['name']]}({TIERS_LABELS[DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
+            f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]}({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
                 i
             ]
             for i in range(len(DISHES_DF))

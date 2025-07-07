@@ -1,7 +1,7 @@
 import gradio as gr
 
 from solver import get_results
-from ui.components import (
+from ui.display import (
     get_blooms_acquisition_rate,
     get_budget,
     get_confiserie_acquisition_rate,
@@ -12,6 +12,7 @@ from ui.components import (
     get_strategy,
     prerender_inventory_inputs,
     update_inventory_inputs,
+    update_inventory_ui_by_language,
 )
 
 # Hightlight the first tier of item
@@ -57,7 +58,7 @@ function createGradioAnimation() {
 
 with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
     with gr.Column(key="main"):
-        lang: gr.Dropdown = get_language()
+        language: gr.Dropdown = get_language()
         currency: gr.Radio = get_currency()
         budget: gr.Number = get_budget()
 
@@ -70,6 +71,13 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
         confiserie_rate: gr.Dropdown = get_confiserie_acquisition_rate()
         solve_button = gr.Button("Solve")
         results_output = gr.Textbox(label="Results", show_copy_button=True)
+
+    gr.on(
+        language.change,
+        update_inventory_ui_by_language,
+        inputs=[language],
+        outputs=inventory_inputs,
+    )
 
     gr.on(
         triggers=[currency.change],
@@ -95,6 +103,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
     solve_button.click(
         fn=get_results,
         inputs=[
+            language,
             currency,
             budget,
             blooms_rate,

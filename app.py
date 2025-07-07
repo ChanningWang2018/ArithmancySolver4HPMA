@@ -1,5 +1,4 @@
 import gradio as gr
-from httpx import get
 
 from solver import get_results, optimize
 from ui.components import (

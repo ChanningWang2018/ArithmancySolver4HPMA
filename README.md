@@ -1,3 +1,14 @@
+---
+title: Arithmancy Solver for HPMA
+emoji: 🎡
+colorFrom: blue
+colorTo: yellow
+sdk: gradio
+sdk_version: 5.34.1
+app_file: app.py
+pinned: True
+---
+
 # Arithmancy Solver for HPMA
 
 This is a web-based tool to help players of _Harry Potter: Magic Awakened_ (HPMA) optimize their in-game trading.

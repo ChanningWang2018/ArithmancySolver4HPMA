@@ -1,0 +1,56 @@
+{
+  "tiers": {
+    "radiant": "RADIANT",
+    "flourishing": "FLOURISHING",
+    "hardy": "HARDY",
+    "feeble": "FEEBLE",
+    "radiant_rarecolor": "RADIANT+RARE",
+    "flourishing_rarecolor": "FLOURISHING+RARE",
+    "hardy_rarecolor": "HARDY+RARE",
+    "legendary": "LEGENDARY",
+    "epic": "EPIC",
+    "rare": "RARE"
+  },
+
+  "plants": {
+    "fanged_geranium": "Fanged Geranium",
+    "gillyweed": "Gillyweed",
+    "rose": "Rose",
+    "vining_marjoram": "Vining Marjoram",
+    "puffapod": "Puffapod",
+    "wild_pansy": "Wild Pansy",
+    "nifflers_fancy": "Niffler's Fancy",
+    "fanwort": "Fanwort",
+    "ladys_mantle": "Lady's Mantle",
+    "paleleaf_laurel": "Paleleaf Laurel",
+    "kelp": "Kelp",
+    "mandrake": "Mandrake",
+    "chinese_chomping_cabbage": "Chinese Chomping Cabbage",
+    "dragons_breath_macroalgae": "Dragon's Breath Macroalgae",
+    "peony": "Peony",
+    "begonia": "Begonia",
+    "mayflower": "Mayflower",
+    "hydrangea": "Hydrangea",
+    "ludwigia_glandulosa": "Ludwigia Glandulosa",
+    "daffodil": "Daffodil",
+    "water_hyacinth": "Water Hyacinth",
+    "lily_of_the_valley": "Lily of the Valley",
+    "mosaic_flower": "Mosaic Flower",
+    "sunflower": "Sunflower",
+    "mimbulus_mimbletonia": "Mimbulus Mimbletonia",
+    "water_lily": "Water Lily"
+  },
+
+  "dishes": {
+    "gilded_shore_risotto": "Gilded Shore Risotto",
+    "farmstead_feast_roast": "Farmstead Feast Roast",
+    "woodland_mushroom_risotto": "Woodland Mushroom Risotto",
+    "braised_venison_stew": "Braised Venison Stew",
+    "hearty_custard_pie": "Hearty Custard Pie",
+    "paleleaf_meat_roll": "Paleleaf Meat Roll",
+    "saltbaked_shrimp": "Saltbaked Shrimp",
+    "hearthroast_chicken": "Hearthroast Chicken",
+    "simple_seared_scallops": "Simple Seared Scallops",
+    "wild_herb_tomahawk": "Wild Herb Tomahawk"
+  }
+}

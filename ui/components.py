@@ -240,8 +240,8 @@ def get_strategy():
     """
     return gr.Radio(
         choices=[
-            (_("High-priced First"), "MaximizeStock"),
-            (_("Low-priced Fisrt"), "MinimizeStock"),
+            (_("Prioritize high-priced items"), "MaximizeStock"),
+            (_("Prioritize low-priced items"), "MinimizeStock"),
         ],
         value="MinimizeStock",
         type="value",

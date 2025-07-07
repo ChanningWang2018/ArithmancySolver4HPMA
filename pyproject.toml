@@ -1,0 +1,12 @@
+[project]
+name = "arithmancysolver4hpma"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gradio==5.34.1",
+    "numpy>=2.3.1",
+    "pandas>=2.3.0",
+    "pyscipopt>=5.5.0",
+]

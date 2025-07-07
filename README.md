@@ -7,7 +7,10 @@ sdk: gradio
 python_version: 3.11
 sdk_version: 5.34.1
 app_file: app.py
-pinned: True
+pinned: true
+thumbnail: >-
+  https://cdn-uploads.huggingface.co/production/uploads/656ab7fafa91c8160906a1c2/Z-6xYlAAlZNZ75bqv4g6e.png
+short_description: 'This is a web-based tool to help players of _Harry Potter: M'
 ---
 
 # Arithmancy Solver for HPMA

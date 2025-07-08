@@ -6,13 +6,15 @@ from ui.display import (
     get_budget,
     get_confiserie_acquisition_rate,
     get_currency,
+    get_dishes_selector,
     get_language,
-    get_selected_dishes,
-    get_selected_plants,
+    get_plants_selector,
     get_strategy,
     prerender_inventory_inputs,
+    update_dishes_selector,
     update_inventory_inputs,
     update_inventory_ui_by_language,
+    update_plants_selector,
 )
 
 # Hightlight the first tier of item
@@ -70,8 +72,8 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
         currency: gr.Radio = get_currency()
         budget: gr.Number = get_budget()
 
-        plants_checkboxes: gr.CheckboxGroup = get_selected_plants("gold")
-        dishes_checkboxes: gr.CheckboxGroup = get_selected_dishes("gold")
+        plants_selector: gr.CheckboxGroup = get_plants_selector("en", "gold")
+        dishes_selector: gr.CheckboxGroup = get_dishes_selector("en", "gold")
         with gr.Row(key="inventory_inputs"):
             inventory_inputs = prerender_inventory_inputs()
         strategy: gr.Radio = get_strategy()
@@ -88,23 +90,37 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
     )
 
     gr.on(
-        triggers=[currency.change],
-        fn=get_selected_plants,
-        inputs=currency,
-        outputs=plants_checkboxes,
+        language.change,
+        fn=update_plants_selector,
+        inputs=[language, currency],
+        outputs=plants_selector,
     )
 
     gr.on(
-        triggers=[currency.change],
-        fn=get_selected_dishes,
-        inputs=currency,
-        outputs=dishes_checkboxes,
+        language.change,
+        fn=update_dishes_selector,
+        inputs=[language, currency],
+        outputs=dishes_selector,
     )
 
     gr.on(
-        triggers=[plants_checkboxes.change, dishes_checkboxes.change],
+        currency.change,
+        fn=get_plants_selector,
+        inputs=[language, currency],
+        outputs=plants_selector,
+    )
+
+    gr.on(
+        currency.change,
+        fn=get_dishes_selector,
+        inputs=[language, currency],
+        outputs=dishes_selector,
+    )
+
+    gr.on(
+        triggers=[plants_selector.change, dishes_selector.change],
         fn=update_inventory_inputs,
-        inputs=[plants_checkboxes, dishes_checkboxes, currency],
+        inputs=[plants_selector, dishes_selector, currency],
         outputs=inventory_inputs,
     )
 

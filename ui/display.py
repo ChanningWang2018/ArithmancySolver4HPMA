@@ -75,7 +75,7 @@ def get_budget():
     """
     return gr.Number(
         value=0,
-        label=_(_("Budget")),
+        label=_(_("Budget💸")),
         info=_(_("Enter your budget amount.")),
         elem_id="budget-number",
         interactive=True,
@@ -99,7 +99,7 @@ def get_blooms_acquisition_rate():
         ],
         value=_("0(Gabby's Acquisition)"),
         type="index",
-        label="Blooms Extra Acquisition Rate",
+        label="Blooms Extra Acquisition Rate🌿",
         info="Select your high-value acquisition rate for Bewildering Blooms.",
         interactive=True,
     )
@@ -116,7 +116,7 @@ def get_confiserie_acquisition_rate():
         ],
         value=_("0(Andre's Acquisition)"),
         type="index",
-        label="Confiserie Extra Acquisition Rate",
+        label="Confiserie Extra Acquisition Rate🍜",
         info="Select your high-value acquisition rate for The Confiserie.",
         interactive=True,
     )

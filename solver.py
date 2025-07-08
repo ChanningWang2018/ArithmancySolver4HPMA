@@ -7,7 +7,7 @@ from ui.i18n import setup_i18n
 
 _ = setup_i18n()
 
-from data_loader import DISHES_DF, DISHES_LABELS, PLANTS_DF, PLANTS_LABELS, TIERS_LABELS
+from data_loader import DISHES_DF, DISHES_LABELS, LABELS, PLANTS_DF, PLANTS_LABELS, TIERS_LABELS
 
 
 def optimize(budget, strategy, stocks, sold_prices):
@@ -103,6 +103,7 @@ def format_results(results):
 
 
 def get_results(
+    language,
     currency,
     budget,
     plants_prices_extra_rate,
@@ -129,7 +130,7 @@ def get_results(
     ]
     results = {}
     results["solution"] = {
-        f"{PLANTS_LABELS[PLANTS_DF.iloc[i]['name']]} ({TIERS_LABELS[PLANTS_DF.iloc[i]['tier']]}, {int(prices[i])} {currency})": plants_solution[
+        f"{LABELS[language]['plants'][PLANTS_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][PLANTS_DF.iloc[i]['tier']]}, {int(prices[i])} {currency})": plants_solution[
             i
         ]
         for i in range(len(PLANTS_DF))
@@ -137,7 +138,7 @@ def get_results(
     }
     results["solution"].update(
         {
-            f"{DISHES_LABELS[DISHES_DF.iloc[i]['name']]}({TIERS_LABELS[DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
+            f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
                 i
             ]
             for i in range(len(DISHES_DF))

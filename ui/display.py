@@ -9,6 +9,7 @@ from data_loader import (
     GEMS_PLANTS_DF,
     GOLD_DISHES_DF,
     GOLD_PLANTS_DF,
+    LABELS,
     PLANTS_DF,
     PLANTS_LABELS,
     TIERS_LABELS,
@@ -23,16 +24,31 @@ def get_language():
     Returns a Gradio Dropdown component for selecting language.
     """
     return gr.Dropdown(
-        choices=[("English", "en-US"), ("简体中文", "cn-ZH"), ("日本語", "ja-JP")],
-        value="en-US",
+        choices=[("English", "en"), ("简体中文", "cn"), ("日本語", "ja")],
+        value="en",
         label=_("Language"),
         info=_(
-            "Select the language for the interface. Currently, only English is supported (ToT)"
+            "Select the language for the interface. Currently, only part of texts are translated."
         ),
         elem_id="language-select",
         interactive=True,
     )
 
+def update_inventory_ui_by_language(language):
+    setup_i18n(language)
+    return [
+        gr.update(
+            label=LABELS[language]["plants"][row["name"]],
+            info=f"{LABELS[language]['tiers'][row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
+        )
+        for _, row in PLANTS_DF.iterrows()
+    ] + [
+        gr.update(
+            label=LABELS[language]["dishes"][row["name"]],
+            info=f"{LABELS[language]['tiers'][row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
+        )
+        for _, row in DISHES_DF.iterrows()
+    ]
 
 def get_currency():
     """

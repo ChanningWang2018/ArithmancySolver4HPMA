@@ -231,7 +231,7 @@ def update_inventory_inputs(
     for _, row in PLANTS_DF.iterrows():
         _out.append(
             gr.update(
-                visible=True and row[currency] > 0 and row["tier"] != "feeble",
+                visible=True and row[currency] > 0 and row["tier"] != "feeble"
             )
             if row["name"] in selected_plants
             else gr.Number(value=0, visible=False)
@@ -239,7 +239,7 @@ def update_inventory_inputs(
     for _, row in DISHES_DF.iterrows():
         _out.append(
             gr.update(
-                visible=row[currency] > 0,
+                visible=row[currency] > 0, 
             )
             if row["name"] in selected_dishes
             else gr.Number(value=0, visible=False)

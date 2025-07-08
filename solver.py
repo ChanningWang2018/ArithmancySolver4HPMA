@@ -124,7 +124,7 @@ def get_results(
     }
     results["solution"].update(
         {
-            f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]}({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
+            f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
                 i
             ]
             for i in range(len(DISHES_DF))

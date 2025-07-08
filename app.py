@@ -57,6 +57,14 @@ function createGradioAnimation() {
 """
 
 with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
+    gr.HTML("""<div style="display: flex; justify-content: center; gap: 20px; ">
+            <a href="https://github.com/ChanningWang2018/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
+                💻 GitHub Repo
+            </a>
+            <a href="https://www.modelscope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
+                📚 ModelScope Studio
+            </a>
+        </div>""")
     with gr.Column(key="main"):
         language: gr.Dropdown = get_language()
         currency: gr.Radio = get_currency()

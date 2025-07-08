@@ -34,9 +34,10 @@ def get_language():
         interactive=True,
     )
 
+
 def update_inventory_ui_by_language(language):
     setup_i18n(language)
-    return [
+    inventory_inputs = [
         gr.update(
             label=LABELS[language]["plants"][row["name"]],
             info=f"{LABELS[language]['tiers'][row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
@@ -49,6 +50,8 @@ def update_inventory_ui_by_language(language):
         )
         for _, row in DISHES_DF.iterrows()
     ]
+    return inventory_inputs
+
 
 def get_currency():
     """
@@ -119,31 +122,33 @@ def get_confiserie_acquisition_rate():
     )
 
 
-def get_selected_plants(currency, select_all=False):
+def match_currency_plant(plant_name: str, currency: str) -> bool:
     """
-    Returns a Gradio CheckboxGroup component for selecting plants based on the currency.
+    Checks if a plant can be purchased with the given currency.
     """
+    if currency == "gold":
+        return plant_name in GOLD_PLANTS_DF["name"].values
+    elif currency == "gems":
+        return plant_name in GEMS_PLANTS_DF["name"].values
+    return False
 
-    def match_currency_plant(plant_name: str, currency: str) -> bool:
-        """
-        Checks if a plant can be purchased with the given currency.
-        """
-        if currency == "gold":
-            return plant_name in GOLD_PLANTS_DF["name"].values
-        elif currency == "gems":
-            return plant_name in GEMS_PLANTS_DF["name"].values
-        return False
 
-    filtered_plants_labels: list[tuple[str, str]] = [
-        (_(PLANTS_LABELS[plant]), plant)
+def _generate_plant_choices(language, currency):
+    return [
+        (LABELS[language]["plants"][plant], plant)
         for plant in PLANTS_LABELS.keys()
         if match_currency_plant(plant, currency)
     ]
 
-    if select_all:
-        default_value = [label for (_, label) in filtered_plants_labels if select_all]
-    else:
-        default_value = None
+
+def get_plants_selector(language, currency):
+    """
+    Returns a Gradio CheckboxGroup component for selecting plants based on the currency.
+    """
+    filtered_plants_labels: list[tuple[str, str]] = _generate_plant_choices(
+        language, currency
+    )
+    default_value = None
 
     checkbox_group_component = gr.CheckboxGroup(
         choices=filtered_plants_labels,
@@ -156,31 +161,40 @@ def get_selected_plants(currency, select_all=False):
     return checkbox_group_component
 
 
-def get_selected_dishes(currency, select_all=False):
-    """
-    Returns a Gradio CheckboxGroup component for selecting plants based on the currency.
-    """
+def update_plants_selector(language, currency):
+    new_choices = _generate_plant_choices(language, currency)
 
-    def match_currency_dish(dish_name: str, currency: str) -> bool:
-        """
-        Checks if a dish can be purchased with the given currency.
-        """
-        if currency == "gold":
-            return dish_name in GOLD_DISHES_DF["name"].values
-        elif currency == "gems":
-            return dish_name in GEMS_DISHES_DF["name"].values
-        return False
+    return gr.update(choices=new_choices)
 
-    filtered_dishes_labels: list[tuple[str, str]] = [
-        (_(DISHES_LABELS[dish]), dish)
+
+def match_currency_dish(dish_name: str, currency: str) -> bool:
+    """
+    Checks if a dish can be purchased with the given currency.
+    """
+    if currency == "gold":
+        return dish_name in GOLD_DISHES_DF["name"].values
+    elif currency == "gems":
+        return dish_name in GEMS_DISHES_DF["name"].values
+    return False
+
+
+def _generate_dish_choices(language, currency):
+    return [
+        (LABELS[language]["dishes"][dish], dish)
         for dish in DISHES_LABELS.keys()
         if match_currency_dish(dish, currency)
     ]
 
-    if select_all:
-        default_value = [label for (_, label) in filtered_dishes_labels if select_all]
-    else:
-        default_value = None
+
+def get_dishes_selector(language, currency):
+    """
+    Returns a Gradio CheckboxGroup component for selecting plants based on the currency.
+    """
+    filtered_dishes_labels: list[tuple[str, str]] = _generate_dish_choices(
+        language, currency
+    )
+
+    default_value = None
 
     return gr.CheckboxGroup(
         choices=filtered_dishes_labels,
@@ -192,9 +206,14 @@ def get_selected_dishes(currency, select_all=False):
     )
 
 
+def update_dishes_selector(language, currency):
+    new_choices = _generate_dish_choices(language, currency)
+
+    return gr.update(choices=new_choices)
+
+
 def prerender_inventory_inputs() -> list[gr.Number]:
     """Returns Gradio Number components for inventory input."""
-    _components = []
 
     def _get_inventory_input(row, visible=True, **kwargs) -> gr.Number:
         """

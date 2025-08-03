@@ -52,7 +52,10 @@
       "saltbaked_shrimp": "Saltbaked Shrimp",
       "hearthroast_chicken": "Hearthroast Chicken",
       "simple_seared_scallops": "Simple Seared Scallops",
-      "wild_herb_tomahawk": "Wild Herb Tomahawk"
+      "wild_herb_tomahawk": "Wild Herb Tomahawk",
+      "deepwater_ink_pasta": "Deepwater Ink Pasta",
+      "golden_cream_pasta": "Golden Cream Pasta"
+
     }
   },
   "cn": {
@@ -108,7 +111,9 @@
       "saltbaked_shrimp": "盐烤海虾",
       "hearthroast_chicken": "浓香烤全鸡",
       "simple_seared_scallops": "香草风味扇贝",
-      "wild_herb_tomahawk": "香草战斧牛排"
+      "wild_herb_tomahawk": "香草战斧牛排",
+      "deepwater_ink_pasta": "墨汁海鲜意面",
+      "golden_cream_pasta": "奶油蟹粉面"
     }
   },
   "ja": {
@@ -164,7 +169,10 @@
       "saltbaked_shrimp": "海老の塩焼き",
       "hearthroast_chicken": "香り豊かなローストチキン",
       "simple_seared_scallops": "ホタテのハーブ焼き",
-      "wild_herb_tomahawk": "トマホークステーキのハーブ焼き"
+      "wild_herb_tomahawk": "トマホークステーキのハーブ焼き",
+      "deepwater_ink_pasta": "Deepwater Ink Pasta",
+      "golden_cream_pasta": "Golden Cream Pasta"
+
     }
   }
 }

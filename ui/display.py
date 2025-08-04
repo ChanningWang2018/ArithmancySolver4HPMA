@@ -280,8 +280,8 @@ def get_strategy():
         ],
         value="MinimizeStock",
         type="value",
-        label=_("Selling Strategy"),
-        info=_("Select the strategy for selling plants."),
+        label=_("Selling Strategy📉📈"),
+        info=_("Select the strategy for selling items."),
         interactive=True,
         elem_id="strategy-radio",
     )

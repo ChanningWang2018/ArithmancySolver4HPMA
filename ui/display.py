@@ -1,3 +1,4 @@
+from hmac import new
 from typing import Sequence
 
 import gradio as gr
@@ -210,6 +211,24 @@ def update_dishes_selector(language, currency):
     new_choices = _generate_dish_choices(language, currency)
 
     return gr.update(choices=new_choices)
+
+
+def update_selectors_on_currency(language, currency):
+    """
+    Updates the plants and dishes selector based on the selected currency.
+    """
+    filtered_plants_labels: list[tuple[str, str]] = _generate_plant_choices(
+        language, currency
+    )
+
+    filtered_dishes_labels: list[tuple[str, str]] = _generate_dish_choices(
+        language, currency
+    )
+
+    return [
+        gr.update(choices=filtered_plants_labels, value=None),
+        gr.update(choices=filtered_dishes_labels, value=None),
+    ]
 
 
 def prerender_inventory_inputs() -> list[gr.Number]:

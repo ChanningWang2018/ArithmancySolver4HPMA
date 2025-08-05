@@ -150,7 +150,7 @@ def get_plants_selector(language, currency):
     )
     default_value = None
 
-    checkbox_group_component = gr.CheckboxGroup(
+    checkbox_group = gr.CheckboxGroup(
         choices=filtered_plants_labels,
         value=default_value,
         type="value",
@@ -158,10 +158,24 @@ def get_plants_selector(language, currency):
         info=_("Select plants"),
         interactive=True,
     )
-    return checkbox_group_component
+    return checkbox_group
 
 
-def update_plants_selector(language, currency):
+def update_plants_selector_on_currency(language, currency):
+    """
+    Updates the plants selector based on the selected currency.
+    """
+    filtered_plants_labels: list[tuple[str, str]] = _generate_plant_choices(
+        language, currency
+    )
+
+    return gr.update(choices=filtered_plants_labels, value=None)
+
+
+def update_plants_selector_on_language(language, currency):
+    """
+    Updates the plants selector based on the selected language.
+    """
     new_choices = _generate_plant_choices(language, currency)
 
     return gr.update(choices=new_choices)
@@ -206,7 +220,40 @@ def get_dishes_selector(language, currency):
     )
 
 
-def update_dishes_selector(language, currency):
+def update_dishes_selector_on_currency(language, currency):
+    """
+    Updates the dishes selector based on the selected currency.
+    """
+
+    filtered_dishes_labels: list[tuple[str, str]] = _generate_dish_choices(
+        language, currency
+    )
+
+    return gr.update(choices=filtered_dishes_labels, value=None)
+
+
+def update_selectors_on_currency(language, currency):
+    """
+    Updates the plants and dishes selector based on the selected currency.
+    """
+    filtered_plants_labels: list[tuple[str, str]] = _generate_plant_choices(
+        language, currency
+    )
+
+    filtered_dishes_labels: list[tuple[str, str]] = _generate_dish_choices(
+        language, currency
+    )
+
+    return [
+        gr.update(choices=filtered_plants_labels, value=None),
+        gr.update(choices=filtered_dishes_labels, value=None),
+    ]
+
+
+def update_dishes_selector_on_language(language, currency):
+    """
+    Updates the dishes selector based on the selected language.
+    """
     new_choices = _generate_dish_choices(language, currency)
 
     return gr.update(choices=new_choices)

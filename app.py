@@ -11,10 +11,13 @@ from ui.display import (
     get_plants_selector,
     get_strategy,
     prerender_inventory_inputs,
-    update_dishes_selector,
+    update_dishes_selector_on_language,
+    update_dishes_selector_on_currency,
     update_inventory_inputs,
     update_inventory_ui_by_language,
-    update_plants_selector,
+    update_plants_selector_on_currency,
+    update_plants_selector_on_language,
+    update_selectors_on_currency,
 )
 
 # Hightlight the first tier of item
@@ -91,30 +94,22 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
 
     gr.on(
         language.change,
-        fn=update_plants_selector,
+        fn=update_plants_selector_on_language,
         inputs=[language, currency],
         outputs=plants_selector,
     )
 
     gr.on(
         language.change,
-        fn=update_dishes_selector,
+        fn=update_dishes_selector_on_language,
         inputs=[language, currency],
         outputs=dishes_selector,
     )
 
-    gr.on(
-        currency.change,
-        fn=get_plants_selector,
+    currency.change(
+        update_selectors_on_currency,
         inputs=[language, currency],
-        outputs=plants_selector,
-    )
-
-    gr.on(
-        currency.change,
-        fn=get_dishes_selector,
-        inputs=[language, currency],
-        outputs=dishes_selector,
+        outputs=[plants_selector, dishes_selector],
     )
 
     gr.on(

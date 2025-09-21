@@ -36,6 +36,12 @@ This is a web-based tool to help players of _Harry Potter: Magic Awakened_ (HPMA
     ```
 3.  Open your web browser and navigate to the URL provided by Gradio.
 
+## 如何更新新的plant与dish
+1. 在plants.csv中添加植物的价格数据，或在dishes.csv中添加dish的价格数据
+
+2. 在ui/labels.json中添加翻译
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request.
+

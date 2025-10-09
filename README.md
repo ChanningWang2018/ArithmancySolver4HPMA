@@ -10,7 +10,7 @@ app_file: app.py
 pinned: true
 thumbnail: >-
   https://cdn-uploads.huggingface.co/production/uploads/656ab7fafa91c8160906a1c2/Z-6xYlAAlZNZ75bqv4g6e.png
-short_description: 'This is a web-based tool to help players of _Harry Potter: M'
+short_description: 'This is a web-based tool to help farmers of HPMA'
 ---
 
 # Arithmancy Solver for HPMA

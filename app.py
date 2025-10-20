@@ -10,12 +10,11 @@ from ui.display import (
     get_language,
     get_plants_selector,
     get_strategy,
+    get_talent_price_bonus,
     prerender_inventory_inputs,
     update_dishes_selector_on_language,
-    update_dishes_selector_on_currency,
     update_inventory_inputs,
     update_inventory_ui_by_language,
-    update_plants_selector_on_currency,
     update_plants_selector_on_language,
     update_selectors_on_currency,
 )
@@ -82,6 +81,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
         strategy: gr.Radio = get_strategy()
         blooms_rate: gr.Dropdown = get_blooms_acquisition_rate()
         confiserie_rate: gr.Dropdown = get_confiserie_acquisition_rate()
+        talent_price_bonus: gr.Number = get_talent_price_bonus()
         solve_button = gr.Button("Solve")
         results_output = gr.Textbox(label="Results", show_copy_button=True)
 
@@ -127,6 +127,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
             budget,
             blooms_rate,
             confiserie_rate,
+            talent_price_bonus,
             strategy,
         ]
         + inventory_inputs,

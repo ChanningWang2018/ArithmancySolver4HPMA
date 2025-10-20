@@ -74,6 +74,10 @@
       "feast_of_loyalty_and_dedication": "Feast of Loyalty and Dedication",
       "feast_of_widsom_and_wit": "Feast of Wisdom and Wit",
       "the_founders_feast": "The Founders Feast"
+    },
+    "ui": {
+      "talent_price_bonus": "Talent Price Bonus(%)",
+      "talent_price_bonus_info": "Enter the total percentage increase in dish selling price from your talents."
     }
   },
   "cn": {
@@ -151,6 +155,10 @@
       "feast_of_loyalty_and_dedication": "忠诚与无私之宴",
       "feast_of_widsom_and_wit": "智慧与风雅之宴",
       "the_founders_feast": "霍格沃茨盛宴"
+    },
+    "ui": {
+      "talent_price_bonus": "天赋价格加成(%)",
+      "talent_price_bonus_info": "输入天赋导致的菜品售价增幅百分比。"
     }
   },
   "ja": {
@@ -228,6 +236,10 @@
       "feast_of_loyalty_and_dedication": "知恵と風雅の宴",
       "feast_of_widsom_and_wit": "忠誠と無私の宴",
       "the_founders_feast": "ホグワーツの饗宴"
+    },
+    "ui": {
+      "talent_price_bonus": "才能価格ボーナス(%)",
+      "talent_price_bonus_info": "才能による料理販売価格の上昇率を入力してください。"
     }
   }
 }

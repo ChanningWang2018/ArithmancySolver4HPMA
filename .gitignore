@@ -12,3 +12,4 @@ wheels/
 # Gemini-CLI
 .gemini
 
+.vscode/

@@ -83,28 +83,6 @@ def optimize(budget, strategy, stocks, sold_prices):
     )
 
 
-def format_results(results):
-    """
-    Format the results for display.
-
-    Args:
-        results (dict): The results dictionary containing solution, total_price, total_count, and remaining.
-
-    Returns:
-        str: A formatted string representation of the results.
-    """
-    output = []
-    output.append(_("Solution:"))
-    for item, count in results["solution"].items():
-        output.append(f"{item}: {count}")
-
-    output.append(f"\n{_('Total Value:')} {results['total_price']}")
-    output.append(f"{_('Total Count:')} {results['total_count']}")
-    output.append(f"{_('Remaining Budget')}: {results['remaining']}")
-
-    return "\n".join(output)
-
-
 def get_results(
     language,
     currency,
@@ -156,4 +134,4 @@ def get_results(
     results["total_price"] = outputs["total_price"]
     results["total_count"] = outputs["total_count"]
     results["remaining"] = outputs["remaining"]
-    return format_results(results)
+    return format_results(results, language)

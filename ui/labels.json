@@ -77,7 +77,63 @@
     },
     "ui": {
       "talent_price_bonus": "Talent Price Bonus(%)",
-      "talent_price_bonus_info": "Enter the total percentage increase in dish selling price from your talents."
+      "talent_price_bonus_info": "Enter the total percentage increase in dish selling price from your talents.",
+      "language": {
+        "label": "Language",
+        "info": "Select the language for the interface."
+      },
+      "currency": {
+        "label": "Currency",
+        "info": "Select the currency.",
+        "gold": "Gold",
+        "gems": "Gems"
+      },
+      "budget": {
+        "label": "Budget💸",
+        "info": "Enter your budget amount."
+      },
+      "strategy": {
+        "label": "Selling Strategy📈📉",
+        "info": "Select the strategy for selling items.",
+        "maximize_stock": "Prioritize high-priced items",
+        "minimize_stock": "Prioritize low-priced items"
+      },
+      "blooms_rate": {
+        "label": "Blooms Extra Acquisition Rate🌿",
+        "info": "Select your high-value acquisition rate for Bewildering Blooms.",
+        "options": [
+          "0(Gabby's Acquisition)",
+          "+100%(HVA for Shop Level 1 & 2)",
+          "+200%(HVA for Shop Level 3 & 4)",
+          "+300%(HVA for Shop Level 5 & 6)"
+        ]
+      },
+      "confiserie_rate": {
+        "label": "Confiserie Extra Acquisition Rate🍜",
+        "info": "Select your high-value acquisition rate for The Confiserie.",
+        "options": [
+          "0(Andre's Acquisition)",
+          "+100%(HVA for Shop Level 1 & 2)",
+          "+200%(HVA for Shop Level 3 & 4)",
+          "+300%(HVA for Shop Level 5 & 6)"
+        ]
+      },
+      "plants_selector": {
+        "label": "Plants",
+        "info": "Select plants"
+      },
+      "dishes_selector": {
+        "label": "Dishes",
+        "info": "Select dishes."
+      },
+      "solve_button": "Solve",
+      "results": {
+        "label": "Results",
+        "solution": "Solution",
+        "total_value": "Total Value",
+        "total_count": "Total Count",
+        "remaining_budget": "Remaining Budget"
+      }
     }
   },
   "cn": {
@@ -158,7 +214,63 @@
     },
     "ui": {
       "talent_price_bonus": "天赋价格加成(%)",
-      "talent_price_bonus_info": "输入天赋导致的菜品售价增幅百分比。"
+      "talent_price_bonus_info": "输入天赋导致的菜品售价增幅百分比",
+      "language": {
+        "label": "语言",
+        "info": "选择界面语言"
+      },
+      "currency": {
+        "label": "货币",
+        "info": "选择货币类型",
+        "gold": "金币",
+        "gems": "宝石"
+      },
+      "budget": {
+        "label": "预算💸",
+        "info": "输入您的预算金额"
+      },
+      "strategy": {
+        "label": "销售策略📈📉",
+        "info": "选择物品销售策略",
+        "maximize_stock": "优先出售高价物品",
+        "minimize_stock": "优先出售低价物品"
+      },
+      "blooms_rate": {
+        "label": "疯狂藤蔓加价倍率🌿",
+        "info": "选择疯狂藤蔓收购的加价倍率",
+        "options": [
+          "0(普通收购)",
+          "+100%(商店等级1-2的高价收购)",
+          "+200%(商店等级3-4的高价收购)",
+          "+300%(商店等级5-6的高价收购)"
+        ]
+      },
+      "confiserie_rate": {
+        "label": "美味工坊加价倍率🍜",
+        "info": "选择美味工坊收购的加价倍率",
+        "options": [
+          "0(普通收购)",
+          "+100%(商店等级1-2的高价收购)",
+          "+200%(商店等级3-4的高价收购)",
+          "+300%(商店等级5-6的高价收购)"
+        ]
+      },
+      "plants_selector": {
+        "label": "植物",
+        "info": "选择植物"
+      },
+      "dishes_selector": {
+        "label": "菜品",
+        "info": "选择菜品"
+      },
+      "solve_button": "求解",
+      "results": {
+        "label": "结果",
+        "solution": "组合方案",
+        "total_value": "总价值",
+        "total_count": "总数量",
+        "remaining_budget": "剩余预算"
+      }
     }
   },
   "ja": {
@@ -239,7 +351,63 @@
     },
     "ui": {
       "talent_price_bonus": "才能価格ボーナス(%)",
-      "talent_price_bonus_info": "才能による料理販売価格の上昇率を入力してください。"
+      "talent_price_bonus_info": "才能による料理販売価格の上昇率を入力してください",
+      "language": {
+        "label": "言語",
+        "info": "インターフェースの言語を選択"
+      },
+      "currency": {
+        "label": "通貨",
+        "info": "通貨を選択",
+        "gold": "ゴールド",
+        "gems": "ジェム"
+      },
+      "budget": {
+        "label": "予算💸",
+        "info": "予算額を入力してください"
+      },
+      "strategy": {
+        "label": "販売戦略📈📉",
+        "info": "アイテムの販売戦略を選択",
+        "maximize_stock": "高価格アイテムを優先",
+        "minimize_stock": "低価格アイテムを優先"
+      },
+      "blooms_rate": {
+        "label": "花々の追加取得率🌿",
+        "info": "花々の高価値取得率を選択",
+        "options": [
+          "0(ギャビーの通常取得)",
+          "+100%(ショップレベル1-2の高価値取得)",
+          "+200%(ショップレベル3-4の高価値取得)",
+          "+300%(ショップレベル5-6の高価値取得)"
+        ]
+      },
+      "confiserie_rate": {
+        "label": "菓子店の追加取得率🍜",
+        "info": "菓子店の高価値取得率を選択",
+        "options": [
+          "0(アンドレの通常取得)",
+          "+100%(ショップレベル1-2の高価値取得)",
+          "+200%(ショップレベル3-4の高価値取得)",
+          "+300%(ショップレベル5-6の高価値取得)"
+        ]
+      },
+      "plants_selector": {
+        "label": "植物",
+        "info": "植物を選択"
+      },
+      "dishes_selector": {
+        "label": "料理",
+        "info": "料理を選択"
+      },
+      "solve_button": "解決",
+      "results": {
+        "label": "結果",
+        "solution": "解決策",
+        "total_value": "合計価値",
+        "total_count": "合計数",
+        "remaining_budget": "残り予算"
+      }
     }
   }
 }

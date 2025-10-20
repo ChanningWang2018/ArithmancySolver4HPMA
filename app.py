@@ -12,10 +12,11 @@ from ui.display import (
     get_strategy,
     get_talent_price_bonus,
     prerender_inventory_inputs,
-    update_dishes_selector,
+    update_all_ui_components,
+    update_dishes_selector_on_language,
     update_inventory_inputs,
     update_inventory_ui_by_language,
-    update_plants_selector,
+    update_plants_selector_on_language,
     update_selectors_on_currency,
 )
 
@@ -61,23 +62,27 @@ function createGradioAnimation() {
 """
 
 with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
+    gr.HTML("""<div style="display: flex; justify-content: center; gap: 20px; ">
+            <a href="https://github.com/ChanningWang2018/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
+                💻 GitHub Repo
+            </a>
+            <a href="https://www.modelscope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
+                📚 ModelScope Studio
+            </a>
+        </div>""")
     with gr.Column(key="main"):
-        language: gr.Dropdown = get_language()
-        currency: gr.Radio = get_currency()
-        budget: gr.Number = get_budget()
+        language: gr.Dropdown = get_language("en")
+        currency: gr.Radio = get_currency("en")
+        budget: gr.Number = get_budget("en")
 
-        plants_selector: gr.CheckboxGroup = get_plants_selector(
-            language="en", currency="gold"
-        )
-        dishes_selector: gr.CheckboxGroup = get_dishes_selector(
-            language="en", currency="gold"
-        )
+        plants_selector: gr.CheckboxGroup = get_plants_selector("en", "gold")
+        dishes_selector: gr.CheckboxGroup = get_dishes_selector("en", "gold")
         with gr.Row(key="inventory_inputs"):
             inventory_inputs = prerender_inventory_inputs()
-        strategy: gr.Radio = get_strategy()
-        blooms_rate: gr.Dropdown = get_blooms_acquisition_rate()
-        confiserie_rate: gr.Dropdown = get_confiserie_acquisition_rate()
-        talent_price_bonus: gr.Number = get_talent_price_bonus()
+        strategy: gr.Radio = get_strategy("en")
+        blooms_rate: gr.Dropdown = get_blooms_acquisition_rate("en")
+        confiserie_rate: gr.Dropdown = get_confiserie_acquisition_rate("en")
+        talent_price_bonus: gr.Number = get_talent_price_bonus("en")
         solve_button = gr.Button("Solve")
         results_output = gr.Textbox(label="Results", show_copy_button=True)
 
@@ -90,16 +95,33 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
 
     gr.on(
         language.change,
-        fn=update_plants_selector,
+        fn=update_plants_selector_on_language,
         inputs=[language, currency],
         outputs=plants_selector,
     )
 
     gr.on(
         language.change,
-        fn=update_dishes_selector,
+        fn=update_dishes_selector_on_language,
         inputs=[language, currency],
         outputs=dishes_selector,
+    )
+
+    gr.on(
+        language.change,
+        fn=update_all_ui_components,
+        inputs=[language],
+        outputs=[
+            language,
+            currency,
+            budget,
+            blooms_rate,
+            confiserie_rate,
+            strategy,
+            talent_price_bonus,
+            results_output,
+            solve_button,
+        ],
     )
 
     currency.change(

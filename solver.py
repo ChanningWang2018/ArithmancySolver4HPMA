@@ -134,4 +134,4 @@ def get_results(
     results["total_price"] = outputs["total_price"]
     results["total_count"] = outputs["total_count"]
     results["remaining"] = outputs["remaining"]
-    return format_results(results)
+    return format_results(results, language)

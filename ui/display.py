@@ -359,7 +359,9 @@ def format_results(results, language="en"):
         f"{LABELS[language]['ui']['results']['total_count']}: {results['total_count']}"
     )
     output.append(
-        f"{LABELS[language]['ui']['results']['remaining_budget']}: {results['remaining']} {'😞' if results['remaining'] else '😁'}"
+        f"{LABELS[language]['ui']['results']['remaining_budget']}: {
+            results['remaining']
+        } {'😞' if results['remaining'] else '😁'}"
     )
 
     return "\n".join(output)

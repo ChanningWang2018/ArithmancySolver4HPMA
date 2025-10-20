@@ -100,7 +100,9 @@ def get_results(
                 DISHES_DF[currency]
                 * (1 + dishes_prices_extra_rate)
                 * (1 + talent_price_bonus / 100)
-            ).astype(np.int16),
+            ).astype(
+                np.int16
+            ),  # Licet(@discord)'s data shows that all values are rounded down: https://docs.google.com/spreadsheets/d/1CWv0VmgfKKWWlqUty9hqGwWt86_G94x5K89DP4b4eRI
         ],
         dtype=np.int16,
     )

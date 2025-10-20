@@ -15,9 +15,6 @@ from data_loader import (
     PLANTS_LABELS,
     TIERS_LABELS,
 )
-from ui.i18n import setup_i18n
-
-_ = setup_i18n()
 
 
 def get_language():
@@ -27,17 +24,14 @@ def get_language():
     return gr.Dropdown(
         choices=[("English", "en"), ("简体中文", "cn"), ("日本語", "ja")],
         value="en",
-        label=_("Language"),
-        info=_(
-            "Select the language for the interface. Currently, only part of texts are translated."
-        ),
+        label="Language",
+        info="Select the language for the interface. Currently, only part of texts are translated.",
         elem_id="language-select",
         interactive=True,
     )
 
 
 def update_inventory_ui_by_language(language):
-    setup_i18n(language)
     inventory_inputs = [
         gr.update(
             label=LABELS[language]["plants"][row["name"]],
@@ -59,7 +53,7 @@ def get_currency():
     Returns a Gradio Radio component for selecting currency.
     """
     return gr.Radio(
-        choices=[(_("Gold"), "gold"), (_("Gems"), "gems")],
+        choices=[("Gold", "gold"), ("Gems", "gems")],
         value="gold",
         type="value",
         label="Currency",
@@ -76,8 +70,8 @@ def get_budget():
     """
     return gr.Number(
         value=0,
-        label=_(_("Budget💸")),
-        info=_(_("Enter your budget amount.")),
+        label="Budget💸",
+        info="Enter your budget amount.",
         elem_id="budget-number",
         interactive=True,
         precision=0,
@@ -93,12 +87,12 @@ def get_blooms_acquisition_rate():
     """
     return gr.Dropdown(
         choices=[
-            _("0(Gabby's Acquisition)"),
-            _("+100%(HVA for Shop Level 1 & 2)"),
-            _("+200%(HVA for Shop Level 3 & 4)"),
-            _("+300%(HVA for Shop Level 5 & 6)"),
+            "0(Gabby's Acquisition)",
+            "+100%(HVA for Shop Level 1 & 2)",
+            "+200%(HVA for Shop Level 3 & 4)",
+            "+300%(HVA for Shop Level 5 & 6)",
         ],
-        value=_("0(Gabby's Acquisition)"),
+        value="0(Gabby's Acquisition)",
         type="index",
         label="Blooms Extra Acquisition Rate🌿",
         info="Select your high-value acquisition rate for Bewildering Blooms.",
@@ -110,12 +104,12 @@ def get_confiserie_acquisition_rate():
     """Returns a Gradio Dropdown component for Confiserie Acquisition Rate."""
     return gr.Dropdown(
         choices=[
-            _("0(Andre's Acquisition)"),
-            _("+100%(HVA for Shop Level 1 & 2)"),
-            _("+200%(HVA for Shop Level 3 & 4)"),
-            _("+300%(HVA for Shop Level 5 & 6)"),
+            "0(Andre's Acquisition)",
+            "+100%(HVA for Shop Level 1 & 2)",
+            "+200%(HVA for Shop Level 3 & 4)",
+            "+300%(HVA for Shop Level 5 & 6)",
         ],
-        value=_("0(Andre's Acquisition)"),
+        value="0(Andre's Acquisition)",
         type="index",
         label="Confiserie Extra Acquisition Rate🍜",
         info="Select your high-value acquisition rate for The Confiserie.",
@@ -155,8 +149,8 @@ def get_plants_selector(language, currency):
         choices=filtered_plants_labels,
         value=default_value,
         type="value",
-        label=_("Plants"),
-        info=_("Select plants"),
+        label="Plants",
+        info="Select plants",
         interactive=True,
     )
     return checkbox_group_component
@@ -201,8 +195,8 @@ def get_dishes_selector(language, currency):
         choices=filtered_dishes_labels,
         value=default_value,
         type="value",
-        label=_("Dishes"),
-        info=_("Select dishes."),
+        label="Dishes",
+        info="Select dishes.",
         interactive=True,
     )
 
@@ -238,14 +232,10 @@ def prerender_inventory_inputs() -> list[gr.Number]:
         """
         Returns a Gradio Number component for inventory input based on the dataframe row data."""
         return gr.Number(
-            label=_(
-                PLANTS_LABELS[row["name"]]
-                if row["name"] in PLANTS_LABELS
-                else DISHES_LABELS[row["name"]]
-            ),
-            info=_(
-                f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}"
-            ),
+            label=PLANTS_LABELS[row["name"]]
+            if row["name"] in PLANTS_LABELS
+            else DISHES_LABELS[row["name"]],
+            info=f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
             value=0,
             precision=0,
             minimum=0,
@@ -288,19 +278,58 @@ def update_inventory_inputs(
     return _out
 
 
+def get_talent_price_bonus():
+    """
+    Returns a Gradio Number component for talent price bonus input.
+    """
+    return gr.Number(
+        value=0,
+        label="Talent Price Bonus(%)",
+        info="Enter the total percentage increase in dish selling price from your talents.",
+        elem_id="talent-price-bonus",
+        interactive=True,
+        precision=0,
+        minimum=0,
+        maximum=1000,
+        step=1,
+    )
+
+
 def get_strategy():
     """
     Returns a Gradio Radio component for selecting the selling strategy.
     """
     return gr.Radio(
         choices=[
-            (_("Prioritize high-priced items"), "MaximizeStock"),
-            (_("Prioritize low-priced items"), "MinimizeStock"),
+            ("Prioritize high-priced items", "MaximizeStock"),
+            ("Prioritize low-priced items", "MinimizeStock"),
         ],
         value="MinimizeStock",
         type="value",
-        label=_("Selling Strategy📉📈"),
-        info=_("Select the strategy for selling items."),
+        label="Selling Strategy📈📉",
+        info="Select the strategy for selling items.",
         interactive=True,
         elem_id="strategy-radio",
     )
+
+
+def format_results(results):
+    """
+    Format the results for display.
+
+    Args:
+        results (dict): The results dictionary containing solution, total_price, total_count, and remaining.
+
+    Returns:
+        str: A formatted string representation of the results.
+    """
+    output = []
+    output.append("Solution:")
+    for item, count in results["solution"].items():
+        output.append(f"{item}: {count}")
+
+    output.append(f"\n{'Total Value:'} {results['total_price']}")
+    output.append(f"{'Total Count:'} {results['total_count']}")
+    output.append(f"{'Remaining Budget'}: {results['remaining']}")
+
+    return "\n".join(output)

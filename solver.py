@@ -3,11 +3,14 @@ from datetime import datetime
 import numpy as np
 from numpy.typing import NDArray
 from pyscipopt import Model, quicksum
-from ui.i18n import setup_i18n
 
-_ = setup_i18n()
+from ui.display import format_results
 
-from data_loader import DISHES_DF, DISHES_LABELS, LABELS, PLANTS_DF, PLANTS_LABELS, TIERS_LABELS
+from data_loader import (
+    DISHES_DF,
+    LABELS,
+    PLANTS_DF,
+)
 
 
 def optimize(budget, strategy, stocks, sold_prices):
@@ -108,13 +111,18 @@ def get_results(
     budget,
     plants_prices_extra_rate,
     dishes_prices_extra_rate,
+    talent_price_bonus,
     strategy,
     *inventory,
 ):
     prices: NDArray[np.int16] = np.concat(
         [
             PLANTS_DF[currency] * (1 + plants_prices_extra_rate),
-            DISHES_DF[currency] * (1 + dishes_prices_extra_rate),
+            np.floor(
+                DISHES_DF[currency]
+                * (1 + dishes_prices_extra_rate)
+                * (1 + talent_price_bonus / 100)
+            ).astype(np.int16),
         ],
         dtype=np.int16,
     )
@@ -136,15 +144,13 @@ def get_results(
         for i in range(len(PLANTS_DF))
         if plants_solution[i] > 0
     }
-    results["solution"].update(
-        {
-            f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
-                i
-            ]
-            for i in range(len(DISHES_DF))
-            if dishes_solution[i] > 0
-        }
-    )
+    results["solution"].update({
+        f"{LABELS[language]['dishes'][DISHES_DF.iloc[i]['name']]} ({LABELS[language]['tiers'][DISHES_DF.iloc[i]['tier']]}, {int(prices[len(PLANTS_DF) + i])} {currency})": dishes_solution[
+            i
+        ]
+        for i in range(len(DISHES_DF))
+        if dishes_solution[i] > 0
+    })
     results["total_price"] = outputs["total_price"]
     results["total_count"] = outputs["total_count"]
     results["remaining"] = outputs["remaining"]

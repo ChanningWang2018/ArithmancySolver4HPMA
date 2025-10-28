@@ -22,8 +22,16 @@ from ui.display import (
 
 # Hightlight the first tier of item
 css = """
-.highlight-gold {background-color: #fafad2}
-.highlight-gems {background-color: #fed9b4}
+/* Minimal tier distinction for inventory inputs */
+.tier-radiant { background-color: #fff8dc; }
+.tier-radiant-rarecolor { background-color: #fff8dc; }
+.tier-flourishing { background-color: #e6e6fa; }
+.tier-flourishing-rarecolor { background-color: #e6e6fa; }
+.tier-hardy { background-color: #f0f8ff; }
+.tier-hardy-rarecolor { background-color: #f0f8ff; }
+.tier-legendary { background-color: #fff8dc; } 
+.tier-epic { background-color: #e6e6fa; }
+.tier-rare { background-color: #f0f8ff; }
 """
 
 # Title Animation
@@ -66,7 +74,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
             <a href="https://github.com/ChanningWang2018/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
                 💻 GitHub Repo
             </a>
-            <a href="https://www.modelscRadioope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
+            <a href="https://www.modelscope.cn/studios/OhMyDearAI/ArithmancySolver4HPMA" target="_blank" style="text-decoration: none; color: #2563eb; font-weight: 500;">
                 📚 ModelScope Studio
             </a>
         </div>""")

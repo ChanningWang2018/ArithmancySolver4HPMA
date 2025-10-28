@@ -18,7 +18,7 @@ from data_loader import (
 
 def get_language(language="en"):
     """
-    Returns a Gradio RadioRadio component for selecting language.
+    Returns a Gradio Radio component for selecting language.
     """
     return gr.Radio(
         choices=[("English", "en"), ("简体中文", "cn"), ("日本語", "ja")],
@@ -250,28 +250,32 @@ def update_dishes_selector_on_language(language, currency):
 
 def prerender_inventory_inputs() -> list[gr.Number]:
     """Returns Gradio Number components for inventory input."""
-
-    def _get_inventory_input(row, visible=True, **kwargs) -> gr.Number:
-        """
-        Returns a Gradio Number component for inventory input based on the dataframe row data."""
-        return gr.Number(
-            label=PLANTS_LABELS[row["name"]]
-            if row["name"] in PLANTS_LABELS
-            else DISHES_LABELS[row["name"]],
-            info=f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
-            value=0,
-            precision=0,
-            minimum=0,
-            maximum=2000,
-            visible=visible,
-            interactive=True,
-            key=f"{row['name']}-{row['tier']}",
-            **kwargs,
-        )
-
     return [
         _get_inventory_input(row, visible=False) for _, row in PLANTS_DF.iterrows()
     ] + [_get_inventory_input(row, visible=False) for _, row in DISHES_DF.iterrows()]
+
+
+def _get_inventory_input(row, visible=True, **kwargs) -> gr.Number:
+    """
+    Returns a Gradio Number component for inventory input based on the dataframe row data."""
+    # Determine CSS class based on tier
+    tier_class = f"tier-{row['tier'].replace('_rarecolor', '-rarecolor')}"
+
+    return gr.Number(
+        label=PLANTS_LABELS[row["name"]]
+        if row["name"] in PLANTS_LABELS
+        else DISHES_LABELS[row["name"]],
+        info=f"{TIERS_LABELS[row['tier']]} ${row['gold'] if row['gold'] > 0 else row['gems']}",
+        value=0,
+        precision=0,
+        minimum=0,
+        maximum=2000,
+        visible=visible,
+        interactive=True,
+        key=f"{row['name']}-{row['tier']}",
+        elem_classes=[tier_class] if visible else [],
+        **kwargs,
+    )
 
 
 def update_inventory_inputs(
@@ -282,21 +286,30 @@ def update_inventory_inputs(
     """
     _out = []
     for _, row in PLANTS_DF.iterrows():
-        _out.append(
-            gr.Number(
-                visible=True and row[currency] > 0 and row["tier"] != "feeble",
+        if row["name"] in selected_plants:
+            is_visible = row[currency] > 0 and row["tier"] != "feeble"
+            tier_class = f"tier-{row['tier'].replace('_rarecolor', '-rarecolor')}"
+            _out.append(
+                gr.Number(
+                    visible=is_visible,
+                    elem_classes=[tier_class] if is_visible else [],
+                )
             )
-            if row["name"] in selected_plants
-            else gr.Number(value=0, visible=False)
-        )
+        else:
+            _out.append(gr.Number(value=0, visible=False))
+
     for _, row in DISHES_DF.iterrows():
-        _out.append(
-            gr.Number(
-                visible=row[currency] > 0,
+        if row["name"] in selected_dishes:
+            is_visible = row[currency] > 0
+            tier_class = f"tier-{row['tier'].replace('_rarecolor', '-rarecolor')}"
+            _out.append(
+                gr.Number(
+                    visible=is_visible,
+                    elem_classes=[tier_class] if is_visible else [],
+                )
             )
-            if row["name"] in selected_dishes
-            else gr.Number(value=0, visible=False)
-        )
+        else:
+            _out.append(gr.Number(value=0, visible=False))
 
     return _out
 

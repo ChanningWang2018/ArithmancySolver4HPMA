@@ -18,9 +18,9 @@ from data_loader import (
 
 def get_language(language="en"):
     """
-    Returns a Gradio Dropdown component for selecting language.
+    Returns a Gradio RadioRadio component for selecting language.
     """
-    return gr.Dropdown(
+    return gr.Radio(
         choices=[("English", "en"), ("简体中文", "cn"), ("日本語", "ja")],
         value="en",
         label=LABELS[language]["ui"]["language"]["label"],

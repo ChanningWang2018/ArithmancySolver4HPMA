@@ -71,7 +71,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
             </a>
         </div>""")
     with gr.Column(key="main"):
-        language: gr.Dropdown = get_language("en")
+        language: gr.Radio = get_language("en")
         currency: gr.Radio = get_currency("en")
         budget: gr.Number = get_budget("en")
 

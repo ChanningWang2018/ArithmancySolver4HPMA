@@ -22,8 +22,16 @@ from ui.display import (
 
 # Hightlight the first tier of item
 css = """
-.highlight-gold {background-color: #fafad2}
-.highlight-gems {background-color: #fed9b4}
+/* Minimal tier distinction for inventory inputs */
+.tier-radiant { background-color: #fff8dc; }
+.tier-radiant-rarecolor { background-color: #fff8dc; }
+.tier-flourishing { background-color: #e6e6fa; }
+.tier-flourishing-rarecolor { background-color: #e6e6fa; }
+.tier-hardy { background-color: #f0f8ff; }
+.tier-hardy-rarecolor { background-color: #f0f8ff; }
+.tier-legendary { background-color: #fff8dc; } 
+.tier-epic { background-color: #e6e6fa; }
+.tier-rare { background-color: #f0f8ff; }
 """
 
 # Title Animation

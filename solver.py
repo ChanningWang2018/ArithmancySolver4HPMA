@@ -93,6 +93,7 @@ def get_results(
     strategy,
     *inventory,
 ):
+    talent_price_bonus = talent_price_bonus or 0
     prices: NDArray[np.int16] = np.concat(
         [
             PLANTS_DF[currency] * (1 + plants_prices_extra_rate),

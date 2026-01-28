@@ -83,6 +83,9 @@ gold,gems,name,tier
 0,10,feast_of_loyalty_and_dedication,legendary
 0,6,feast_of_loyalty_and_dedication,epic
 0,3,feast_of_loyalty_and_dedication,rare
-0,10,feast_of_widsom_and_wit,legendary
-0,6,feast_of_widsom_and_wit,epic
-0,3,feast_of_widsom_and_wit,rare
+0,10,feast_of_wisdom_and_wit,legendary
+0,6,feast_of_wisdom_and_wit,epic
+0,3,feast_of_wisdom_and_wit,rare
+0,10,the_founders_feast,legendary
+0,6,the_founders_feast,epic
+0,3,the_founders_feast,rare

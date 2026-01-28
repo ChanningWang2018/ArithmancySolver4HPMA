@@ -12,7 +12,6 @@
       "epic": "EPIC",
       "rare": "RARE"
     },
-
     "plants": {
       "fanged_geranium": "Fanged Geranium",
       "gillyweed": "Gillyweed",
@@ -43,7 +42,6 @@
       "mimbulus_mimbletonia": "Mimbulus Mimbletonia",
       "water_lily": "Water Lily"
     },
-
     "dishes": {
       "gilded_shore_risotto": "Gilded Shore Risotto",
       "farmstead_feast_roast": "Farmstead Feast Roast",
@@ -73,7 +71,7 @@
       "feast_of_courage_and_chivalry": "Feast of Courage and Chivalry",
       "feast_of_cunning_and_ambition": "Feast of Cunning and Ambition",
       "feast_of_loyalty_and_dedication": "Feast of Loyalty and Dedication",
-      "feast_of_widsom_and_wit": "Feast of Wisdom and Wit",
+      "feast_of_wisdom_and_wit": "Feast of Wisdom and Wit",
       "the_founders_feast": "The Founders Feast"
     },
     "ui": {
@@ -150,7 +148,6 @@
       "epic": "史诗",
       "rare": "稀有"
     },
-
     "plants": {
       "fanged_geranium": "毒牙天竺葵",
       "gillyweed": "鳃囊草",
@@ -181,7 +178,6 @@
       "mimbulus_mimbletonia": "米布米宝",
       "water_lily": "睡莲"
     },
-
     "dishes": {
       "gilded_shore_risotto": "海鱼黄金焗饭",
       "farmstead_feast_roast": "果香烤乳猪",
@@ -211,7 +207,7 @@
       "feast_of_courage_and_chivalry": "勇气与胆识之宴",
       "feast_of_cunning_and_ambition": "野心与荣耀之宴",
       "feast_of_loyalty_and_dedication": "忠诚与无私之宴",
-      "feast_of_widsom_and_wit": "智慧与风雅之宴",
+      "feast_of_wisdom_and_wit": "智慧与风雅之宴",
       "the_founders_feast": "霍格沃茨盛宴"
     },
     "ui": {
@@ -288,7 +284,6 @@
       "epic": "エピック",
       "rare": "レア"
     },
-
     "plants": {
       "fanged_geranium": "牙付きゼラニウム",
       "gillyweed": "鰓昆布",
@@ -319,7 +314,6 @@
       "mimbulus_mimbletonia": "ミンビュラス",
       "water_lily": "スイレン"
     },
-
     "dishes": {
       "gilded_shore_risotto": "魚介の黄金リゾット",
       "farmstead_feast_roast": "フルーツ風味の子豚の丸焼き",
@@ -349,7 +343,7 @@
       "feast_of_courage_and_chivalry": "勇気と度胸の宴",
       "feast_of_cunning_and_ambition": "野心と栄光の宴",
       "feast_of_loyalty_and_dedication": "知恵と風雅の宴",
-      "feast_of_widsom_and_wit": "忠誠と無私の宴",
+      "feast_of_wisdom_and_wit": "忠誠と無私の宴",
       "the_founders_feast": "ホグワーツの饗宴"
     },
     "ui": {

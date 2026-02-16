@@ -81,7 +81,8 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
 
     gr.HTML(
         """<div style="text-align: center; font-weight: bold;">
-           ✨✨✨Click <a href="https://grimmauldplace.top/sales-optimizer" target="_blank" style="color: #2563eb;">here</a> to try another cool solver!✨✨✨
+            <p>✨✨✨Click <a href="https://grimmauldplace.top/sales-optimizer" target="_blank" style="color: #2563eb;">here</a> to try another cool solver!✨✨✨</p>
+            <p>🐴"Horse" you doing? Happy New Year! 🐴</p>
         </div>"""
     )
     with gr.Column(key="main"):

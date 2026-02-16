@@ -81,7 +81,7 @@ with gr.Blocks(js=js, css=css, theme=gr.themes.Monochrome()) as demo:
 
     gr.HTML(
         """<div style="text-align: center; font-weight: bold;">
-           ✨✨✨Click <a href="https://hpma-phb.netlify.app/sales-optimizer" target="_blank" style="color: #2563eb;">here</a> to try another cool solver!✨✨✨
+           ✨✨✨Click <a href="https://grimmauldplace.top/sales-optimizer" target="_blank" style="color: #2563eb;">here</a> to try another cool solver!✨✨✨
         </div>"""
     )
     with gr.Column(key="main"):
